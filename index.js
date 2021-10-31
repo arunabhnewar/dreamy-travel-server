@@ -34,9 +34,8 @@ async function run() {
         // Add New Vacation API
         app.post('/vacations', async (req, res) => {
             console.log(req.body);
-            // const result = await vacationCollection.insertOne(req.body);
-            res.send('Hit the post');
-            console.log(result);
+            const result = await vacationCollection.insertOne(req.body);
+            res.send(result);
         })
 
         // Add Orders API
