@@ -30,6 +30,15 @@ async function run() {
             const vacations = await cursor.toArray();
             res.send(vacations);
         })
+
+        // Add New Vacation API
+        app.post('/vacations', async (req, res) => {
+            console.log(req.body);
+            // const result = await vacationCollection.insertOne(req.body);
+            res.send('Hit the post');
+            console.log(result);
+        })
+
         // Add Orders API
         app.post('/orders', async (req, res) => {
             const order = req.body;
@@ -37,12 +46,19 @@ async function run() {
             console.log(result);
             res.send(result);
         })
+
         // GET Orders API
         app.get('/orders', async (req, res) => {
             const cursor = orderCollection.find({});
             const order = await cursor.toArray();
             console.log(order);
             res.send(order);
+        })
+        // GET EMAIL API
+        app.get('/orders/:email', async (req, res) => {
+            const email = req.params.email;
+            const result = await orderCollection.find({ email }).toArray();
+            res.json(result);
         })
         // DELETE Orders
         app.delete('/orders/:id', async (req, res) => {
@@ -51,6 +67,8 @@ async function run() {
             const result = await orderCollection.deleteOne(query);
             res.send(result);
         })
+
+
     }
     finally {
         // await client.close();
