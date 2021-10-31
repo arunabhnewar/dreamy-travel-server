@@ -31,14 +31,14 @@ async function run() {
             res.send(vacations);
         })
 
-        // Add New Vacation API
+        // Add NEW VACATIONS API
         app.post('/vacations', async (req, res) => {
             console.log(req.body);
             const result = await vacationCollection.insertOne(req.body);
             res.send(result);
         })
 
-        // Add Orders API
+        // Add ORDERS API
         app.post('/orders', async (req, res) => {
             const order = req.body;
             const result = await orderCollection.insertOne(order);
@@ -46,7 +46,7 @@ async function run() {
             res.send(result);
         })
 
-        // GET Orders API
+        // GET ORDERS API
         app.get('/orders', async (req, res) => {
             const cursor = orderCollection.find({});
             const order = await cursor.toArray();
@@ -59,7 +59,7 @@ async function run() {
             const result = await orderCollection.find({ email }).toArray();
             res.json(result);
         })
-        // 
+        // GET ORDER CONFIRMATION
         app.put('/orders/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) }
@@ -71,7 +71,7 @@ async function run() {
             const result = await orderCollection.updateOne(query, manage)
             res.json(result)
         })
-        // DELETE Orders
+        // DELETE ORDERS
         app.delete('/orders/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
