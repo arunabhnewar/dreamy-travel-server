@@ -59,6 +59,18 @@ async function run() {
             const result = await orderCollection.find({ email }).toArray();
             res.json(result);
         })
+        // 
+        app.put('/orders/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) }
+            const manage = {
+                $set: {
+                    status: 'Confirm'
+                }
+            }
+            const result = await orderCollection.updateOne(query, manage)
+            res.json(result)
+        })
         // DELETE Orders
         app.delete('/orders/:id', async (req, res) => {
             const id = req.params.id;
