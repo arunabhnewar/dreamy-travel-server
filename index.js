@@ -3,7 +3,7 @@ const express = require('express');
 const { MongoClient } = require('mongodb');
 const cors = require('cors');
 require('dotenv').config();
-// const ObjectId = require('mongodb').ObjectId;
+const ObjectId = require('mongodb').ObjectId;
 
 // port
 const app = express();
@@ -63,7 +63,7 @@ async function run() {
         // DELETE Orders
         app.delete('/orders/:id', async (req, res) => {
             const id = req.params.id;
-            const query = { _id: (id) };
+            const query = { _id: ObjectId(id) };
             const result = await orderCollection.deleteOne(query);
             res.send(result);
         })
